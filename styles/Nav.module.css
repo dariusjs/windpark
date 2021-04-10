@@ -1,0 +1,22 @@
+.nav {
+    height: 50px;
+    padding: 10px;
+    background: rgb(13, 80, 182);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .nav ul li a {
+    margin: 5px 15px;
+    color: inherit;
+    text-decoration: none;
+  }

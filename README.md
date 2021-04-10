@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Windfarm - Polymorphic Table Demo
+
+Similair to the [SheepFarm demo Next.js app](https://https://github.com/dariusjs/sheepfarm) the Windfarm simulates a use case where we have a Wind Farm Management User Interface (UI).
+
+The UI allows us to view Windfarms under management as well as Wind Turbines assigned to each Wind Farm. Clicking through the Wind Farm page we can then view readings of the Wind Turbine. This last part still needs refinement as I need to figure out Next.js Link referencing properly so I've hardcoded only one Turbine for now :)
+
+The code in this application is not produciton ready. A lot of concerns need to be taken care of for production such Paging through records, routing data through an API and caching data.
+
+## Examples of the WindFarm
+
+![allWindFarms.png](./architecture/assets/allWindFarms.png)
+
+![allWindTurbines.png](./architecture/assets/allWindTurbines.png)
+
+![turbineReadings.png](./architecture/assets/turbineReadings.png)
+
+## Requiurements
+* installed docker
+* yarn
+* nodejs runtime
+* an available (dummy )AWS credential set for the data preload scripts.
 
 ## Getting Started
 
-First, run the development server:
+TLDR; of getting started just hit:
 
-```bash
-npm run dev
-# or
+```
+yarn devDb
+```
+
+## Required Local DynamoDB
+The project requires a local DynamoDB which can be executed through either:
+
+```
+yarn dynamo
+
+or 
+
+sudo docker run  -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb
+```
+
+## Run the Next.js server
+
+Once the Data is preloaded you can then run the next.js server or skip the above step and just run yarn devDb which will also preload the data at the same time.
+
+```
 yarn dev
+
+or 
+
+yarn devDb  (to preload the DynamoDB at the same time)
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Designing DynamoDB tables 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+With DynamoDB there are some design principles to follow. You should model your schema into a Diagram, comonly done as an Entity Relationship Diagram. Then you should describe some access patterns. In our case we can come up with these access patterns:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+* I want to view all my Wind Farms
+* I want to view all my Wind Turbines
+* I want to view the details of my Wind Turbines
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+With this we can then start modelling something onto DynamoDB Workbench. I've provided a sample Workbench file which we use to process the contents into our local DynamoDB model https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### DynamoDB WorkBench File
+We have a DynamoDB Workbench file that can be used to preload sample data into the local DynamoDB file.
 
-## Deploy on Vercel
+[WorkBench FIle](./architecture/windfarm.json)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### WindFarm Entity Relationship Diagram
+![windfarm.png](./architecture/windfarm.png)

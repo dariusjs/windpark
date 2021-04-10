@@ -8,3 +8,9 @@ export default function handler(req, res) {
 }
 
 // curl -d "hello" http://localhost:3000/api/hello
+const data = {
+  HouseNumber: 2061,
+  StreetName: "Zeeweg",
+  PostCode: "2051EC",
+  Country: "NL",
+};
