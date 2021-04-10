@@ -39,7 +39,7 @@ function WindTurbine() {
     (async () => {
       const windTurbine = await windTurbineQuery();
 
-      const allTurbines = windTurbine.Items.map((element: WindTurbineType) => {
+      const allTurbines = windTurbine.map((element: WindTurbineType) => {
         return {
           col1: element.pk,
           col2: element.manufacturer,

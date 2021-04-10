@@ -4,7 +4,7 @@ Similair to the [SheepFarm demo Next.js app](https://https://github.com/dariusjs
 
 The UI allows us to view Windfarms under management as well as Wind Turbines assigned to each Wind Farm. Clicking through the Wind Farm page we can then view readings of the Wind Turbine. This last part still needs refinement as I need to figure out Next.js Link referencing properly so I've hardcoded only one Turbine for now :)
 
-The code in this application is not produciton ready. A lot of concerns need to be taken care of for production such Paging through records, routing data through an API and caching data.
+The code in this application is not intended for production use. For production cases concerns need to be taken care of such as cleanly paging through records, routing data through an API, taking care of rate limiting factors and load.
 
 ## Examples of the WindFarm
 
@@ -22,7 +22,7 @@ The code in this application is not produciton ready. A lot of concerns need to 
 
 ## Getting Started
 
-TLDR; of getting started just hit:
+TLDR; of getting started just hit. This will start the Next.js server and pump some sample data with the workbench as a source as well as adding some additonal sample turbine readings.
 
 ```
 yarn devDb

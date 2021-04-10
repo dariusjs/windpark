@@ -82,12 +82,41 @@ const dbclient = new DynamoDBClient({
   region: REGION
 });
 
-const abc = windfarm.DataModel[0].TableData;
-for (const element of abc) {
-  console.log({
-    TableName: dynamoTableName,
-    Item: element
-  });
+const sleep = (milliseconds: number) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+function getRandomInt(min: number, max: number): number {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+async function pumpTurbine() {
+  for (let i = 0; i < 200; i++) {
+    await sleep(30);
+    await dbclient.send(
+      new PutItemCommand({
+        TableName: dynamoTableName,
+        Item: {
+          pk: {
+            S: '1a29ce7d-31ab-499a-9404-ed3f00402b18'
+          },
+          sk: {
+            S: `reading#${new Date().toISOString()}`
+          },
+          kWOut: {
+            N: getRandomInt(0, 5000).toString()
+          },
+          wind: {
+            N: getRandomInt(0, 30).toString()
+          },
+          date: {
+            S: new Date().toISOString()
+          }
+        }
+      })
+    );
+  }
 }
 
 const run = async () => {
@@ -95,8 +124,8 @@ const run = async () => {
     await dbclient.send(new CreateTableCommand(tableParams));
     console.log('Table created.');
 
-    const abc: any = windfarm.DataModel[0].TableData;
-    for (const element of abc) {
+    const workBenchData: any = windfarm.DataModel[0].TableData;
+    for (const element of workBenchData) {
       await dbclient.send(
         new PutItemCommand({
           TableName: dynamoTableName,
@@ -105,6 +134,7 @@ const run = async () => {
       );
       console.log(element);
     }
+    await pumpTurbine();
     console.log('Data Loaded.');
     console.log('gsiParams', JSON.stringify(gsiParams, null, 2));
 

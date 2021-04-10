@@ -34,7 +34,7 @@ function Readings() {
     (async () => {
       const windTurbine = await windTurbineReadingsQuery('1a29ce7d-31ab-499a-9404-ed3f00402b18');
 
-      const allTurbines = windTurbine.Items.map((element: TurbineReadingsType) => {
+      const allTurbines = windTurbine.map((element: TurbineReadingsType) => {
         return {
           col1: element.date,
           col2: element.pk,

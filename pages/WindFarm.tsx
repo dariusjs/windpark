@@ -5,7 +5,7 @@ import React from 'react';
 import { WindFarmType } from '../server/types/storage';
 
 function WindTurbine({ windFarm }: any) {
-  const allTurbines = windFarm.Items.map((element: WindFarmType) => {
+  const allTurbines = windFarm.map((element: WindFarmType) => {
     return {
       col1: element.windfarm,
       col2: element.type,
@@ -50,7 +50,6 @@ function WindTurbine({ windFarm }: any) {
 }
 export async function getServerSideProps() {
   const windFarm = await windFarmQuery();
-  console.log('windFarm:', windFarm);
   return { props: { windFarm } };
 }
 
