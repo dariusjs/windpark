@@ -1,0 +1,420 @@
+{
+  "ModelName": "windfarm",
+  "ModelMetadata": {
+    "Author": "Darius Seroka",
+    "DateCreated": "Apr 02, 2021, 12:10 AM",
+    "DateLastModified": "Apr 10, 2021, 04:34 PM",
+    "Description": "Windfarm example",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "2.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "windfarm",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "pk",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "sk",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "kWOut",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "kWIn",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "wind",
+          "AttributeType": "N"
+        },
+        {
+          "AttributeName": "manufacturer",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "model",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "location",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "type",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "gsi1pk1",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "gsi1sk1",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "windfarm",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "date",
+          "AttributeType": "S"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "assets",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "gsi1pk1",
+              "AttributeType": "S"
+            },
+            "SortKey": {
+              "AttributeName": "gsi1sk1",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        }
+      ],
+      "TableData": [
+        {
+          "pk": {
+            "S": "6c261403-c69c-418a-a548-ba0a936e9fa7"
+          },
+          "sk": {
+            "S": "6c261403-c69c-418a-a548-ba0a936e9fa7"
+          },
+          "manufacturer": {
+            "S": "Siemens"
+          },
+          "model": {
+            "S": "SG 5.8-155"
+          },
+          "location": {
+            "S": "52.426467, 4.592811"
+          },
+          "type": {
+            "S": "turbine"
+          },
+          "gsi1pk1": {
+            "S": "turbine"
+          },
+          "gsi1sk1": {
+            "S": "6c261403-c69c-418a-a548-ba0a936e9fa7"
+          },
+          "windfarm": {
+            "S": "NL-01"
+          }
+        },
+        {
+          "pk": {
+            "S": "1a29ce7d-31ab-499a-9404-ed3f00402b18"
+          },
+          "sk": {
+            "S": "1a29ce7d-31ab-499a-9404-ed3f00402b18"
+          },
+          "manufacturer": {
+            "S": "Siemens"
+          },
+          "model": {
+            "S": "SG 5.8-170"
+          },
+          "location": {
+            "S": "52.437857, 4.590896"
+          },
+          "type": {
+            "S": "turbine"
+          },
+          "gsi1pk1": {
+            "S": "turbine"
+          },
+          "gsi1sk1": {
+            "S": "1a29ce7d-31ab-499a-9404-ed3f00402b18"
+          },
+          "windfarm": {
+            "S": "NL-01"
+          }
+        },
+        {
+          "pk": {
+            "S": "6b048ab4-99e9-423a-8db1-d764bc4061ae"
+          },
+          "sk": {
+            "S": "6b048ab4-99e9-423a-8db1-d764bc4061ae"
+          },
+          "manufacturer": {
+            "S": "Vestas"
+          },
+          "model": {
+            "S": "V136"
+          },
+          "location": {
+            "S": "52.414181, 4.576789"
+          },
+          "type": {
+            "S": "turbine"
+          },
+          "gsi1pk1": {
+            "S": "turbine"
+          },
+          "gsi1sk1": {
+            "S": "6b048ab4-99e9-423a-8db1-d764bc4061ae"
+          },
+          "windfarm": {
+            "S": "NL-01"
+          }
+        },
+        {
+          "pk": {
+            "S": "f73ad174-e29e-4285-a620-59ffc5271532"
+          },
+          "sk": {
+            "S": "f73ad174-e29e-4285-a620-59ffc5271532"
+          },
+          "manufacturer": {
+            "S": "Vestas"
+          },
+          "model": {
+            "S": "V126"
+          },
+          "location": {
+            "S": "52.412192, 4.568850 "
+          },
+          "type": {
+            "S": "turbine"
+          },
+          "gsi1pk1": {
+            "S": "turbine"
+          },
+          "gsi1sk1": {
+            "S": "f73ad174-e29e-4285-a620-59ffc5271532"
+          },
+          "windfarm": {
+            "S": "NL-01"
+          }
+        },
+        {
+          "pk": {
+            "S": "d827395f-940f-4fc4-a967-4dd7239503e0"
+          },
+          "sk": {
+            "S": "d827395f-940f-4fc4-a967-4dd7239503e0"
+          },
+          "manufacturer": {
+            "S": "Vestas"
+          },
+          "model": {
+            "S": "V112"
+          },
+          "location": {
+            "S": "52.406105, 4.587177"
+          },
+          "type": {
+            "S": "turbine"
+          },
+          "gsi1pk1": {
+            "S": "turbine"
+          },
+          "gsi1sk1": {
+            "S": "d827395f-940f-4fc4-a967-4dd7239503e0"
+          },
+          "windfarm": {
+            "S": "NL-01"
+          }
+        },
+        {
+          "pk": {
+            "S": "6c261403-c69c-418a-a548-ba0a936e9fa7"
+          },
+          "sk": {
+            "S": "reading#2021-04-01T20:37:34Z"
+          },
+          "kWOut": {
+            "N": "2500"
+          },
+          "wind": {
+            "N": "25"
+          },
+          "date": {
+            "S": "2021-04-01T20:37:34Z"
+          }
+        },
+        {
+          "pk": {
+            "S": "1a29ce7d-31ab-499a-9404-ed3f00402b18"
+          },
+          "sk": {
+            "S": "reading#2021-04-01T20:37:34Z"
+          },
+          "kWOut": {
+            "N": "3541"
+          },
+          "wind": {
+            "N": "25"
+          },
+          "date": {
+            "S": "2021-04-01T20:37:34Z"
+          }
+        },
+        {
+          "pk": {
+            "S": "6b048ab4-99e9-423a-8db1-d764bc4061ae"
+          },
+          "sk": {
+            "S": "reading#2021-04-01T20:37:34Z"
+          },
+          "kWOut": {
+            "N": "2541"
+          },
+          "wind": {
+            "N": "25"
+          },
+          "date": {
+            "S": "2021-04-01T20:37:34Z"
+          }
+        },
+        {
+          "pk": {
+            "S": "f73ad174-e29e-4285-a620-59ffc5271532"
+          },
+          "sk": {
+            "S": "reading#2021-04-01T20:37:34Z"
+          },
+          "kWOut": {
+            "N": "1120"
+          },
+          "wind": {
+            "N": "18"
+          },
+          "date": {
+            "S": "2021-04-01T20:37:34Z"
+          }
+        },
+        {
+          "pk": {
+            "S": "d827395f-940f-4fc4-a967-4dd7239503e0"
+          },
+          "sk": {
+            "S": "reading#2021-04-01T20:37:34Z"
+          },
+          "kWOut": {
+            "N": "3100"
+          },
+          "wind": {
+            "N": "28"
+          },
+          "date": {
+            "S": "2021-04-01T20:37:34Z"
+          }
+        },
+        {
+          "pk": {
+            "S": "NL-01"
+          },
+          "sk": {
+            "S": "NL-01"
+          },
+          "kWOut": {
+            "N": "20000"
+          },
+          "manufacturer": {
+            "S": "Van Oord"
+          },
+          "type": {
+            "S": "WindFarmLandBased"
+          },
+          "gsi1pk1": {
+            "S": "windfarm"
+          },
+          "gsi1sk1": {
+            "S": "type#land"
+          },
+          "windfarm": {
+            "S": "NL-01"
+          }
+        },
+        {
+          "pk": {
+            "S": "NL-02"
+          },
+          "sk": {
+            "S": "NL-02"
+          },
+          "kWOut": {
+            "N": "30000"
+          },
+          "manufacturer": {
+            "S": "Van Oord"
+          },
+          "type": {
+            "S": "WindFarmOffShore"
+          },
+          "gsi1pk1": {
+            "S": "windfarm"
+          },
+          "gsi1sk1": {
+            "S": "type#offshore"
+          },
+          "windfarm": {
+            "S": "NL-02"
+          }
+        },
+        {
+          "pk": {
+            "S": "NL-03"
+          },
+          "sk": {
+            "S": "NL-03"
+          },
+          "kWOut": {
+            "N": "15000"
+          },
+          "manufacturer": {
+            "S": "Van Oord"
+          },
+          "type": {
+            "S": "WindFarmOffShore"
+          },
+          "gsi1pk1": {
+            "S": "windfarm"
+          },
+          "gsi1sk1": {
+            "S": "type#offshore"
+          },
+          "windfarm": {
+            "S": "NL-03"
+          }
+        },
+        {
+          "pk": {
+            "S": "1a29ce7d-31ab-499a-9404-ed3f00402b18"
+          },
+          "sk": {
+            "S": "reading#2021-04-02T20:37:34Z"
+          },
+          "kWOut": {
+            "N": "4102"
+          },
+          "wind": {
+            "N": "31"
+          },
+          "date": {
+            "S": "2021-04-02T20:37:34Z"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
