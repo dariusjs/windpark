@@ -13,6 +13,12 @@ export default function Nav() {
         <li>
           <Link href="WindTurbine">WindTurbine</Link>
         </li>
+        <li>
+          <Link href="chart">Chart</Link>
+        </li>
+        <li>
+          <Link href="chart2">Chart2</Link>
+        </li>
       </ul>
     </nav>
   );
