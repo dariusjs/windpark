@@ -15,7 +15,7 @@ const WindTurbine = t.type({
 const WindFarm = t.type({
   pk: t.string,
   sk: t.string,
-  kWOut: t.string,
+  kWOut: t.number,
   manufacturer: t.string,
   type: t.string,
   gsi1pk1: t.string,
@@ -27,8 +27,8 @@ const TurbineReadings = t.type({
   pk: t.string,
   sk: t.string,
   date: t.string,
-  kWOut: t.string,
-  wind: t.string
+  kWOut: t.number,
+  wind: t.number
 });
 
 export type WindTurbineType = t.TypeOf<typeof WindTurbine>;

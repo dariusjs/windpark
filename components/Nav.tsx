@@ -11,7 +11,7 @@ export default function Nav() {
           <Link href="WindFarm">WindFarm</Link>
         </li>
         <li>
-          <Link href="WindTurbine">WindTurbine</Link>
+          <Link href={{ pathname: 'WindTurbine', query: { windfarm: '' } }}>WindTurbine</Link>
         </li>
       </ul>
     </nav>

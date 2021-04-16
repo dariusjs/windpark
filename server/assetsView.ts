@@ -1,39 +1,45 @@
+import { QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 import { execute } from './dynamo';
 
-export async function windTurbineQuery() {
-  const data = await execute({
+export async function windTurbineQuery(sk: string) {
+  const data: QueryCommandInput = await execute({
     TableName: 'windfarm',
     IndexName: 'assets',
-    KeyConditionExpression: '#bef90 = :bef90',
-    ExpressionAttributeNames: { '#bef90': 'gsi1pk1' },
-    ExpressionAttributeValues: { ':bef90': 'turbine' }
+    KeyConditionExpression: '#pk = :pk And begins_with(#sk, :sk)',
+    ExpressionAttributeNames: { '#pk': 'gsi1pk1', '#sk': 'gsi1sk1' },
+    ExpressionAttributeValues: { ':pk': 'turbine', ':sk': `windfarm#${sk}` },
+    ReturnConsumedCapacity: 'TOTAL'
   });
   return data;
 }
 
 export async function windFarmQuery() {
-  const data = await execute({
+  const data: QueryCommandInput = await execute({
     TableName: 'windfarm',
     IndexName: 'assets',
-    KeyConditionExpression: '#bef90 = :bef90',
-    ExpressionAttributeNames: { '#bef90': 'gsi1pk1' },
-    ExpressionAttributeValues: { ':bef90': 'windfarm' }
+    KeyConditionExpression: '#pk = :pk',
+    ExpressionAttributeNames: { '#pk': 'gsi1pk1' },
+    ExpressionAttributeValues: { ':pk': 'windfarm' },
+    ReturnConsumedCapacity: 'TOTAL'
   });
   return data;
 }
 
 export async function windTurbineReadingsQuery(pk: string) {
-  const data = await execute({
+  const data: QueryCommandInput = await execute({
     TableName: 'windfarm',
-    KeyConditionExpression: '#bef90 = :bef90 And begins_with(#bef91, :bef91)',
-    ExpressionAttributeValues: {
-      ':bef90': pk,
-      ':bef91': 'reading'
-    },
+    KeyConditionExpression: '#pk = :pk And begins_with(#sk, :sk)',
     ExpressionAttributeNames: {
-      '#bef90': 'pk',
-      '#bef91': 'sk'
-    }
+      '#pk': 'pk',
+      '#sk': 'sk'
+    },
+    ExpressionAttributeValues: {
+      ':pk': pk,
+      ':sk': 'reading'
+    },
+    ScanIndexForward: false,
+    ReturnConsumedCapacity: 'TOTAL'
+    // Limit: 10
   });
   return data;
 }

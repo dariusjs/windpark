@@ -3,7 +3,7 @@
   "ModelMetadata": {
     "Author": "Darius Seroka",
     "DateCreated": "Apr 02, 2021, 12:10 AM",
-    "DateLastModified": "Apr 10, 2021, 04:34 PM",
+    "DateLastModified": "Apr 16, 2021, 10:25 PM",
     "Description": "Windfarm example",
     "AWSService": "Amazon DynamoDB",
     "Version": "2.0"
@@ -109,7 +109,7 @@
             "S": "turbine"
           },
           "gsi1sk1": {
-            "S": "6c261403-c69c-418a-a548-ba0a936e9fa7"
+            "S": "windfarm#NL-01#id#6c261403-c69c-418a-a548-ba0a936e9fa7"
           },
           "windfarm": {
             "S": "NL-01"
@@ -138,7 +138,7 @@
             "S": "turbine"
           },
           "gsi1sk1": {
-            "S": "1a29ce7d-31ab-499a-9404-ed3f00402b18"
+            "S": "windfarm#NL-01#id#1a29ce7d-31ab-499a-9404-ed3f00402b18"
           },
           "windfarm": {
             "S": "NL-01"
@@ -167,7 +167,7 @@
             "S": "turbine"
           },
           "gsi1sk1": {
-            "S": "6b048ab4-99e9-423a-8db1-d764bc4061ae"
+            "S": "windfarm#NL-01#id#6b048ab4-99e9-423a-8db1-d764bc4061ae"
           },
           "windfarm": {
             "S": "NL-01"
@@ -196,7 +196,7 @@
             "S": "turbine"
           },
           "gsi1sk1": {
-            "S": "f73ad174-e29e-4285-a620-59ffc5271532"
+            "S": "windfarm#NL-01#id#f73ad174-e29e-4285-a620-59ffc5271532"
           },
           "windfarm": {
             "S": "NL-01"
@@ -225,7 +225,7 @@
             "S": "turbine"
           },
           "gsi1sk1": {
-            "S": "d827395f-940f-4fc4-a967-4dd7239503e0"
+            "S": "windfarm#NL-01#id#d827395f-940f-4fc4-a967-4dd7239503e0"
           },
           "windfarm": {
             "S": "NL-01"

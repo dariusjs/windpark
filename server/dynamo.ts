@@ -1,38 +1,43 @@
-import AWS from 'aws-sdk';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 
-let documentClient = new AWS.DynamoDB.DocumentClient({
+const client = new DynamoDBClient({
   credentials: {
-    accessKeyId: '1234',
-    secretAccessKey: '1234'
+    accessKeyId: '1234', // Only for Demo purposes these should come from a safe place
+    secretAccessKey: '1234' // Only for Demo purposes these should come from a safe place
   },
   region: 'eu-west-1',
-  endpoint: 'http://localhost:8000',
-  convertEmptyValues: true
+  endpoint: 'http://localhost:8000'
 });
+const ddbDocClient = DynamoDBDocumentClient.from(client);
 
-export async function execute(getItemInput: any) {
-  const data = await executeGetItem(documentClient, getItemInput);
-  return data;
-}
-
-async function executeGetItem(documentClient: AWS.DynamoDB.DocumentClient, getItemInput: any) {
+export async function query(queryInput: QueryCommandInput) {
   try {
-    const params = { ...getItemInput };
-    var results: any[] = [];
-    var items;
-    do {
-      items = await documentClient.query(getItemInput).promise();
-      items.Items.forEach((item) => results.push(item));
-      params.ExclusiveStartKey = items.LastEvaluatedKey;
-    } while (typeof items.LastEvaluatedKey !== 'undefined');
+    const results = (await ddbDocClient.send(new QueryCommand(queryInput))).Items;
 
-    console.info('GetItem executed successfully.');
+    // const params = { ...queryInput };
+    // var results: any[] = [];
+    // var items;
+    // do {
+    //   items = await ddbDocClient.send(new QueryCommand(queryInput));
+    //   console.log('items', items);
+    //   items.Items.forEach((item) => results.push(item));
+    //   params.ExclusiveStartKey = items.LastEvaluatedKey;
+    // } while (typeof items.LastEvaluatedKey !== 'undefined');
+
+    // console.log('results', results);
+    // console.info('GetItem executed successfully.');
     return results;
   } catch (err) {
     console.log(err);
     handleGetItemError(err);
     return err;
   }
+}
+
+export async function execute(queryInput: QueryCommandInput) {
+  const data = await query(queryInput);
+  return data;
 }
 
 function handleGetItemError(err: any) {
