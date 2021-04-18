@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
 
-const WindTurbine = t.type({
+export const WindTurbine = t.type({
   pk: t.string,
   sk: t.string,
   manufacturer: t.string,
@@ -12,23 +12,33 @@ const WindTurbine = t.type({
   windfarm: t.string
 });
 
-const WindFarm = t.type({
+export enum WindFarmVariation {
+  Land = 'land',
+  OffShore = 'offshore'
+}
+
+const WindFarmTypeV = t.keyof({
+  [WindFarmVariation.Land]: null,
+  [WindFarmVariation.OffShore]: null
+});
+
+export const WindFarm = t.type({
   pk: t.string,
   sk: t.string,
-  kWOut: t.string,
+  kWOut: t.number,
   manufacturer: t.string,
-  type: t.string,
+  type: WindFarmTypeV,
   gsi1pk1: t.string,
   gsi1sk1: t.string,
   windfarm: t.string
 });
 
-const TurbineReadings = t.type({
+export const TurbineReadings = t.type({
   pk: t.string,
   sk: t.string,
   date: t.string,
-  kWOut: t.string,
-  wind: t.string
+  kWOut: t.number,
+  wind: t.number
 });
 
 export type WindTurbineType = t.TypeOf<typeof WindTurbine>;

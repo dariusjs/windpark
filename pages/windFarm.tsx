@@ -1,26 +1,20 @@
-import { useTable } from 'react-table';
 import { windFarmQuery } from '../server/assetsView';
 import Table from '../components/Table';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { WindFarmType } from '../server/types/storage';
+import Link from 'next/link';
 
 function WindTurbine({ windFarm }: any) {
-  const allTurbines = windFarm.map((element: WindFarmType) => {
-    return {
-      col1: element.windfarm,
-      col2: element.type,
-      col3: element.manufacturer,
-      col4: element.kWOut
-    };
-  });
-
-  const data = React.useMemo(() => allTurbines, []);
-
   const columns = React.useMemo(
     () => [
       {
         Header: 'Name',
-        accessor: 'col1'
+        accessor: 'col1',
+        Cell: ({ value }: any) => (
+          <Link href={{ pathname: 'windTurbine', query: { windfarm: value } }}>
+            <a>{value}</a>
+          </Link>
+        )
       },
       {
         Header: 'Type',
@@ -38,9 +32,21 @@ function WindTurbine({ windFarm }: any) {
     []
   );
 
-  const tableInstance = useTable({ columns, data });
+  const [data, setData] = useState([]);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  useEffect(() => {
+    (async () => {
+      const allWindFarms = windFarm.map((element: WindFarmType) => {
+        return {
+          col1: element.pk,
+          col2: element.type,
+          col3: element.manufacturer,
+          col4: element.kWOut
+        };
+      });
+      setData(allWindFarms);
+    })();
+  }, []);
 
   return (
     <div className="App">
@@ -48,6 +54,7 @@ function WindTurbine({ windFarm }: any) {
     </div>
   );
 }
+
 export async function getServerSideProps() {
   const windFarm = await windFarmQuery();
   return { props: { windFarm } };

@@ -8,10 +8,13 @@ export default function Nav() {
           <Link href="index">Home</Link>
         </li>
         <li>
-          <Link href="WindFarm">WindFarm</Link>
+          <Link href="windFarm">WindFarm</Link>
         </li>
         <li>
-          <Link href="WindTurbine">WindTurbine</Link>
+          <Link href={{ pathname: 'windTurbine', query: { windfarm: '' } }}>WindTurbine</Link>
+        </li>
+        <li>
+          <Link href="admin">Admin</Link>
         </li>
         <li>
           <Link href="chart">Chart</Link>

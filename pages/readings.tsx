@@ -1,12 +1,9 @@
-import { useTable } from 'react-table';
-import { windTurbineQuery, windTurbineReadingsQuery } from '../server/assetsView';
+import { windTurbineReadingsQuery } from '../server/assetsView';
 import Table from '../components/Table';
 import React, { useEffect, useMemo, useState } from 'react';
-import { TurbineReadingsType, WindTurbineType } from '../server/types/storage';
-import Link from 'next/link';
-import axios from 'axios';
+import { TurbineReadingsType } from '../server/types/storage';
 
-function Readings() {
+function Readings({ turbine }: any) {
   const columns = useMemo(
     () => [
       {
@@ -32,9 +29,9 @@ function Readings() {
 
   useEffect(() => {
     (async () => {
-      const windTurbine = await windTurbineReadingsQuery('1a29ce7d-31ab-499a-9404-ed3f00402b18');
+      // const windTurbine = await windTurbineReadingsQuery(turbine);
 
-      const allTurbines = windTurbine.map((element: TurbineReadingsType) => {
+      const allTurbines = turbine.map((element: TurbineReadingsType) => {
         return {
           col1: element.date,
           col2: element.pk,
@@ -51,6 +48,18 @@ function Readings() {
       <Table columns={columns} data={data} />
     </div>
   );
+}
+
+// Readings.getInitialProps = async ({ query }: any) => {
+//   const { turbine } = query;
+
+//   return { turbine };
+// };
+export async function getServerSideProps({ query }) {
+  const pk = query.turbine;
+
+  const turbine = await windTurbineReadingsQuery(pk);
+  return { props: { turbine } };
 }
 
 export default Readings;
