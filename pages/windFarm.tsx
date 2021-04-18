@@ -1,26 +1,17 @@
 import { windFarmQuery } from '../server/assetsView';
 import Table from '../components/Table';
 import React, { useEffect, useState } from 'react';
-import { WindFarmType, WindTurbineType } from '../server/types/storage';
+import { WindFarmType } from '../server/types/storage';
 import Link from 'next/link';
 
 function WindTurbine({ windFarm }: any) {
-  const allWindFarms = windFarm.map((element: WindFarmType) => {
-    return {
-      col1: element.windfarm,
-      col2: element.type,
-      col3: element.manufacturer,
-      col4: element.kWOut
-    };
-  });
-
   const columns = React.useMemo(
     () => [
       {
         Header: 'Name',
         accessor: 'col1',
         Cell: ({ value }: any) => (
-          <Link href={{ pathname: 'WindTurbine', query: { windfarm: value } }}>
+          <Link href={{ pathname: 'windTurbine', query: { windfarm: value } }}>
             <a>{value}</a>
           </Link>
         )

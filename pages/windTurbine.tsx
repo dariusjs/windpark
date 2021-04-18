@@ -11,7 +11,7 @@ function WindTurbine({ windfarm }: any) {
         Header: 'ID',
         accessor: 'col1',
         Cell: ({ value }: any) => (
-          <Link href={{ pathname: '/Readings', query: { turbine: value } }}>
+          <Link href={{ pathname: '/readings', query: { turbine: value } }}>
             <a>{value}</a>
           </Link>
         )
