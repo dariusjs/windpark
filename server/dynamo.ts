@@ -1,10 +1,16 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, QueryCommand, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBClient, Put } from '@aws-sdk/client-dynamodb';
+import {
+  DynamoDBDocumentClient,
+  PutCommand,
+  PutCommandInput,
+  QueryCommand,
+  QueryCommandInput
+} from '@aws-sdk/lib-dynamodb';
 
 const client = new DynamoDBClient({
   credentials: {
-    accessKeyId: '1234', // Only for Demo purposes these should come from a safe place
-    secretAccessKey: '1234' // Only for Demo purposes these should come from a safe place
+    accessKeyId: Math.random().toString(), // Only for Demo purposes these should come from a safe place and not from a static config file
+    secretAccessKey: Math.random().toString() // Only for Demo purposes these should come from a safe place and not from a static config file
   },
   region: 'eu-west-1',
   endpoint: 'http://localhost:8000'
@@ -15,6 +21,7 @@ export async function query(queryInput: QueryCommandInput) {
   try {
     const results = (await ddbDocClient.send(new QueryCommand(queryInput))).Items;
 
+    // @TODO - Some mechanism for querying more than 1MB
     // const params = { ...queryInput };
     // var results: any[] = [];
     // var items;
@@ -35,7 +42,19 @@ export async function query(queryInput: QueryCommandInput) {
   }
 }
 
-export async function execute(queryInput: QueryCommandInput) {
+export async function documentClientPut(putInput: PutCommandInput) {
+  console.log(putInput);
+  try {
+    const results = await ddbDocClient.send(new PutCommand(putInput));
+    return results;
+  } catch (err) {
+    console.log(err);
+    handleGetItemError(err);
+    return err;
+  }
+}
+
+export async function execute(queryInput: QueryCommandInput | PutCommandInput) {
   const data = await query(queryInput);
   return data;
 }

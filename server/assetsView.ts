@@ -1,5 +1,6 @@
-import { QueryCommandInput } from '@aws-sdk/lib-dynamodb';
-import { execute } from './dynamo';
+import { PutCommandInput, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
+import { documentClientPut, execute } from './dynamo';
+import { WindFarmType, WindTurbineType } from './types/storage';
 
 export async function windTurbineQuery(sk: string) {
   const data: QueryCommandInput = await execute({
@@ -43,3 +44,21 @@ export async function windTurbineReadingsQuery(pk: string) {
   });
   return data;
 }
+
+export async function createAsset<AssetType>(items: AssetType) {
+  const data: PutCommandInput = await documentClientPut({
+    TableName: 'windfarm',
+    Item: items,
+    ConditionExpression: 'attribute_not_exists(pk)'
+  });
+  return data;
+}
+
+// export async function createWindTurbine(items: WindTurbineType) {
+//   const data: PutCommandInput = await documentClientPut({
+//     TableName: 'windfarm',
+//     Item: items,
+//     ConditionExpression: 'attribute_not_exists(pk)'
+//   });
+//   return data;
+// }
