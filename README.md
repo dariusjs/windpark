@@ -2,17 +2,19 @@
 
 Similair to the [SheepFarm demo Next.js app](https://https://github.com/dariusjs/sheepfarm) the Windfarm simulates a use case where we have a Wind Farm Management User Interface (UI).
 
-The UI allows us to view Windfarms under management as well as Wind Turbines assigned to each Wind Farm. Clicking through the Wind Farm page we can then view readings of the Wind Turbine. This last part still needs refinement as I need to figure out Next.js Link referencing properly so I've hardcoded only one Turbine for now :)
+The UI allows us to view Windfarms under management as well as Wind Turbines assigned to each Wind Farm. Clicking through the Wind Farm page you can select WindFarms and then view readings of the Wind Turbine. Through the admin it is then possible to add new WindFarms or new Wind Turbines.
 
 The code in this application is not intended for production use. For production cases concerns need to be taken care of such as cleanly paging through records, routing data through an API, taking care of rate limiting factors and load.
 
 ## Examples of the WindFarm
 
-![allWindFarms.png](./architecture/assets/allWindFarms.png)
+![allWindFarms.png](./architecture/assets/windfarms.PNG)
 
-![allWindTurbines.png](./architecture/assets/allWindTurbines.png)
+![allWindTurbines.png](./architecture/assets/turbines.PNG)
 
-![turbineReadings.png](./architecture/assets/turbineReadings.png)
+![turbineReadings.png](./architecture/assets/turbineReadings.PNG)
+
+![admin.png](./architecture/assets/admin.PNG)
 
 ## Requiurements
 * installed docker

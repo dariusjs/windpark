@@ -16,6 +16,18 @@ export default function Nav() {
         <li>
           <Link href="admin">Admin</Link>
         </li>
+        <li>
+          <Link href="chart">Chart</Link>
+        </li>
+        <li>
+          <Link href="chart2">Chart2</Link>
+        </li>
+        <li>
+          <Link href="chart3">Chart3</Link>
+        </li>
+        <li>
+          <Link href="chart4">Chart4</Link>
+        </li>
       </ul>
     </nav>
   );
