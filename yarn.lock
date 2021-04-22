@@ -977,6 +977,15 @@
   dependencies:
     "@types/react" "^16"
 
+"@types/react-simple-maps@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-simple-maps/-/react-simple-maps-1.0.3.tgz#aa09e74dddb4e609a35bf86b426b73d5124dfd6d"
+  integrity sha512-cCDAsa8FRlTwvMUOUMK3+5ANnF1TDXlLoqpmIOYYIAYXT4nKwpsgSMOWjPoJyCRx5U+pN8rIK+A/HAcyAh6UWA==
+  dependencies:
+    "@types/d3-geo" "*"
+    "@types/geojson" "*"
+    "@types/react" "*"
+
 "@types/react-table@^7.0.29":
   version "7.0.29"
   resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.0.29.tgz#af2c82f2d6a39be5bc0f191b30501309a8db0949"
