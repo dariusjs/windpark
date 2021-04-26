@@ -21,19 +21,6 @@ export async function query(queryInput: QueryCommandInput) {
   try {
     const results = (await ddbDocClient.send(new QueryCommand(queryInput))).Items;
 
-    // @TODO - Some mechanism for querying more than 1MB
-    // const params = { ...queryInput };
-    // var results: any[] = [];
-    // var items;
-    // do {
-    //   items = await ddbDocClient.send(new QueryCommand(queryInput));
-    //   console.log('items', items);
-    //   items.Items.forEach((item) => results.push(item));
-    //   params.ExclusiveStartKey = items.LastEvaluatedKey;
-    // } while (typeof items.LastEvaluatedKey !== 'undefined');
-
-    // console.log('results', results);
-    // console.info('GetItem executed successfully.');
     return results;
   } catch (err) {
     console.log(err);
