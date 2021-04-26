@@ -19,9 +19,14 @@ const ddbDocClient = DynamoDBDocumentClient.from(client);
 
 export async function query(queryInput: QueryCommandInput) {
   try {
-    const results = (await ddbDocClient.send(new QueryCommand(queryInput))).Items;
-
-    return results;
+    const results = await ddbDocClient.send(new QueryCommand(queryInput));
+    try {
+      if (results && results.Items !== undefined) {
+        return results.Items;
+      }
+    } catch (error) {
+      throw error;
+    }
   } catch (err) {
     console.log(err);
     handleGetItemError(err);

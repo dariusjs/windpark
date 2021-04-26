@@ -4,13 +4,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { WindTurbineType } from '../server/types/storage';
 import Link from 'next/link';
 
-function WindTurbine({ windfarm }: any) {
+function WindTurbine({ windfarm }) {
   const columns = useMemo(
     () => [
       {
         Header: 'ID',
         accessor: 'col1',
-        Cell: ({ value }: any) => (
+        Cell: ({ value }) => (
           <Link href={{ pathname: '/readings', query: { turbine: value } }}>
             <a>{value}</a>
           </Link>
@@ -35,8 +35,6 @@ function WindTurbine({ windfarm }: any) {
 
   useEffect(() => {
     (async () => {
-      // const windTurbine = await windTurbineQuery(windfarm);
-
       const allTurbines = windfarm.map((element: WindTurbineType) => {
         return {
           col1: element.pk,
@@ -55,13 +53,6 @@ function WindTurbine({ windfarm }: any) {
     </div>
   );
 }
-
-// This could be static generation?
-// WindTurbine.getInitialProps = async ({ query }: any) => {
-//   const { windfarm } = query;
-
-//   return { windfarm };
-// };
 
 export async function getServerSideProps({ query }) {
   const sk = query.windfarm;

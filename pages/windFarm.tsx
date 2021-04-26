@@ -4,13 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { WindFarmType } from '../server/types/storage';
 import Link from 'next/link';
 
-function WindTurbine({ windFarm }: any) {
+function WindTurbine({ bla }) {
   const columns = React.useMemo(
     () => [
       {
         Header: 'Name',
         accessor: 'col1',
-        Cell: ({ value }: any) => (
+        Cell: ({ value }) => (
           <Link href={{ pathname: 'windTurbine', query: { windfarm: value } }}>
             <a>{value}</a>
           </Link>
@@ -36,7 +36,7 @@ function WindTurbine({ windFarm }: any) {
 
   useEffect(() => {
     (async () => {
-      const allWindFarms = windFarm.map((element: WindFarmType) => {
+      const allWindFarms = bla.map((element: WindFarmType) => {
         return {
           col1: element.pk,
           col2: element.type,
@@ -56,8 +56,8 @@ function WindTurbine({ windFarm }: any) {
 }
 
 export async function getServerSideProps() {
-  const windFarm = await windFarmQuery();
-  return { props: { windFarm } };
+  const bla = await windFarmQuery();
+  return { props: { bla } };
 }
 
 export default WindTurbine;

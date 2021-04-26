@@ -1,9 +1,9 @@
 import { PutCommandInput, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
-import { documentClientPut, execute } from './dynamo';
-import { WindFarmType, WindTurbineType } from './types/storage';
+import { documentClientPut, query } from './dynamo';
+import { TurbineReadingsType, WindFarmType, WindTurbineType } from './types/storage';
 
 export async function windTurbineQuery(sk: string) {
-  const data: QueryCommandInput = await execute({
+  const data = await query({
     TableName: 'windfarm',
     IndexName: 'assets',
     KeyConditionExpression: '#pk = :pk And begins_with(#sk, :sk)',
@@ -15,7 +15,7 @@ export async function windTurbineQuery(sk: string) {
 }
 
 export async function windFarmQuery() {
-  const data: QueryCommandInput = await execute({
+  const data: WindFarmType[] = await query({
     TableName: 'windfarm',
     IndexName: 'assets',
     KeyConditionExpression: '#pk = :pk',
@@ -27,7 +27,7 @@ export async function windFarmQuery() {
 }
 
 export async function windTurbineReadingsQuery(pk: string) {
-  const data: QueryCommandInput = await execute({
+  const data: TurbineReadingsType[] = await query({
     TableName: 'windfarm',
     KeyConditionExpression: '#pk = :pk And begins_with(#sk, :sk)',
     ExpressionAttributeNames: {
@@ -53,12 +53,3 @@ export async function createAsset<AssetType>(items: AssetType) {
   });
   return data;
 }
-
-// export async function createWindTurbine(items: WindTurbineType) {
-//   const data: PutCommandInput = await documentClientPut({
-//     TableName: 'windfarm',
-//     Item: items,
-//     ConditionExpression: 'attribute_not_exists(pk)'
-//   });
-//   return data;
-// }
