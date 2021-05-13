@@ -2,7 +2,11 @@ import { PutCommandInput, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 import { documentClientPut, query } from './dynamo';
 import { TurbineReadingsType, WindFarmType, WindTurbineType } from './types/storage';
 
-export async function windTurbineQuery(sk: string) {
+export async function windTurbineQuery(sk: string): Promise<
+  {
+    [key: string]: WindFarmType[];
+  }[]
+> {
   const data = await query({
     TableName: 'windfarm',
     IndexName: 'assets',
@@ -11,11 +15,15 @@ export async function windTurbineQuery(sk: string) {
     ExpressionAttributeValues: { ':pk': 'turbine', ':sk': `windfarm#${sk}` },
     ReturnConsumedCapacity: 'TOTAL'
   });
-  return data;
+  return data.Items!;
 }
 
-export async function windFarmQuery() {
-  const data: WindFarmType[] = await query({
+export async function windFarmQuery(): Promise<
+  {
+    [key: string]: WindFarmType[];
+  }[]
+> {
+  const data = await query({
     TableName: 'windfarm',
     IndexName: 'assets',
     KeyConditionExpression: '#pk = :pk',
@@ -23,11 +31,15 @@ export async function windFarmQuery() {
     ExpressionAttributeValues: { ':pk': 'windfarm' },
     ReturnConsumedCapacity: 'TOTAL'
   });
-  return data;
+  return data.Items!;
 }
 
-export async function windTurbineReadingsQuery(pk: string) {
-  const data: TurbineReadingsType[] = await query({
+export async function windTurbineReadingsQuery(pk: string): Promise<
+  {
+    [key: string]: TurbineReadingsType[];
+  }[]
+> {
+  const data = await query({
     TableName: 'windfarm',
     KeyConditionExpression: '#pk = :pk And begins_with(#sk, :sk)',
     ExpressionAttributeNames: {
@@ -42,14 +54,5 @@ export async function windTurbineReadingsQuery(pk: string) {
     ReturnConsumedCapacity: 'TOTAL'
     // Limit: 10
   });
-  return data;
-}
-
-export async function createAsset<AssetType>(items: AssetType) {
-  const data: PutCommandInput = await documentClientPut({
-    TableName: 'windfarm',
-    Item: items,
-    ConditionExpression: 'attribute_not_exists(pk)'
-  });
-  return data;
+  return data.Items!;
 }

@@ -4,7 +4,8 @@ import {
   PutCommand,
   PutCommandInput,
   QueryCommand,
-  QueryCommandInput
+  QueryCommandInput,
+  QueryCommandOutput
 } from '@aws-sdk/lib-dynamodb';
 
 const client = new DynamoDBClient({
@@ -17,16 +18,9 @@ const client = new DynamoDBClient({
 });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 
-export async function query(queryInput: QueryCommandInput) {
+export async function query(queryInput: QueryCommandInput): Promise<QueryCommandOutput> {
   try {
-    const results = await ddbDocClient.send(new QueryCommand(queryInput));
-    try {
-      if (results && results.Items !== undefined) {
-        return results.Items;
-      }
-    } catch (error) {
-      throw error;
-    }
+    return await ddbDocClient.send(new QueryCommand(queryInput));
   } catch (err) {
     console.log(err);
     handleGetItemError(err);

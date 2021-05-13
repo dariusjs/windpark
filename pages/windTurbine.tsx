@@ -3,14 +3,15 @@ import Table from '../components/Table';
 import React, { useEffect, useMemo, useState } from 'react';
 import { WindTurbineType } from '../server/types/storage';
 import Link from 'next/link';
+import { windTurbine, value } from '../server/types/api';
 
-function WindTurbine({ windfarm }) {
+function WindTurbine({ windTurbine }: windTurbine) {
   const columns = useMemo(
     () => [
       {
         Header: 'ID',
         accessor: 'col1',
-        Cell: ({ value }) => (
+        Cell: ({ value }: value) => (
           <Link href={{ pathname: '/readings', query: { turbine: value } }}>
             <a>{value}</a>
           </Link>
@@ -35,7 +36,7 @@ function WindTurbine({ windfarm }) {
 
   useEffect(() => {
     (async () => {
-      const allTurbines = windfarm.map((element: WindTurbineType) => {
+      const allTurbines = windTurbine.map((element: WindTurbineType) => {
         return {
           col1: element.pk,
           col2: element.manufacturer,
@@ -57,8 +58,8 @@ function WindTurbine({ windfarm }) {
 export async function getServerSideProps({ query }) {
   const sk = query.windfarm;
 
-  const windfarm = await windTurbineQuery(sk);
-  return { props: { windfarm } };
+  const windTurbine = await windTurbineQuery(sk);
+  return { props: { windTurbine } };
 }
 
 export default WindTurbine;
