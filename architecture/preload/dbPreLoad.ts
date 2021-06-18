@@ -2,7 +2,7 @@ import { DynamoDBClient, CreateTableCommand, PutItemCommand, UpdateTableCommand 
 import windfarm from '../windfarm.json';
 
 const REGION = 'REGION';
-const dynamoTableName = 'windfarm';
+const dynamoTableName = windfarm.DataModel[0].TableName;
 const tableParams = {
   KeySchema: [
     { AttributeName: 'pk', KeyType: 'HASH' },
