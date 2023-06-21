@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "npx nodemon",
     "devDb": "npx yarn dynamo; npx nodemon",
+    "devDbLoad": "npx yarn dynamoLoad; npx nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "dynamo": "sudo docker run -d --rm --name dynamoLocal -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb; npx ts-node architecture/preload/dbPreLoad.ts",
+    "dynamoLoad": "npx ts-node architecture/preload/dbPreLoad.ts",
     "dynamo:start": "sudo docker run -d --rm --name dynamoLocal -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb",
     "dynamo:load": "npx ts-node architecture/preload/dbPreLoad.ts",
     "dynamo:stop": "sudo docker stop dynamoLocal"
@@ -18,14 +20,15 @@
     "axios": "^0.21.1",
     "d3": "^6.7.0",
     "d3-geo": "^2.0.1",
-    "fp-ts": "^2.10.2",
-    "io-ts": "^2.2.16",
+    "fp-ts": "^2.16.0",
+    "io-ts": "^2.2.20",
     "next": "latest",
-    "react": "^17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
     "react-simple-maps": "^2.3.0",
     "react-table": "^7.6.3",
-    "topojson-client": "3"
+    "topojson-client": "3",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.0",

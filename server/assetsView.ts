@@ -56,3 +56,12 @@ export async function windTurbineReadingsQuery(pk: string): Promise<
   });
   return data.Items!;
 }
+
+export async function createAsset<AssetType>(items: AssetType) {
+  const data: PutCommandInput = await documentClientPut({
+    TableName: 'windfarm',
+    Item: items,
+    ConditionExpression: 'attribute_not_exists(pk)'
+  });
+  return data;
+}

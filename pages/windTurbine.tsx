@@ -11,11 +11,7 @@ function WindTurbine({ windTurbine }: windTurbine) {
       {
         Header: 'ID',
         accessor: 'col1',
-        Cell: ({ value }: value) => (
-          <Link href={{ pathname: '/readings', query: { turbine: value } }}>
-            <a>{value}</a>
-          </Link>
-        )
+        Cell: ({ value }: value) => <Link href={{ pathname: '/readings', query: { turbine: value } }}>{value}</Link>
       },
       {
         Header: 'Manufacturer',
@@ -28,6 +24,10 @@ function WindTurbine({ windTurbine }: windTurbine) {
       {
         Header: 'Location',
         accessor: 'col4'
+      },
+      {
+        Header: 'Windfarm',
+        accessor: 'col5'
       }
     ],
     []
@@ -41,7 +41,8 @@ function WindTurbine({ windTurbine }: windTurbine) {
           col1: element.pk,
           col2: element.manufacturer,
           col3: element.model,
-          col4: element.location
+          col4: element.location,
+          col5: element.windfarm
         };
       });
       setData(allTurbines);
